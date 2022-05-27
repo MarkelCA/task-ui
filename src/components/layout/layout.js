@@ -1,14 +1,10 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import './index.css';
-import { FileOutlined, PieChartOutlined, UserOutlined, TeamOutlined, DesktopOutlined, BookOutlined, CheckOutlined } from '@ant-design/icons';
+import '../../index.css';
+import { FileOutlined, PieChartOutlined, UserOutlined, TeamOutlined, DesktopOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
-import {Typography} from "antd";
 import { useState } from 'react';
-import CreateTaskBox from './components/create-task-box'
-import TaskList from './components/task-list'
 const { Header, Content, Footer, Sider } = Layout;
-const {Title} = Typography
 
 function getItem(label, key, icon, children) {
   return {
@@ -20,11 +16,18 @@ function getItem(label, key, icon, children) {
 }
 
 const items = [
-  getItem('Personal', '1', <UserOutlined />),
-  getItem('Estudios', '2', <BookOutlined />),
+  getItem('Option 1', '1', <PieChartOutlined />),
+  getItem('Option 2', '2', <DesktopOutlined />),
+  getItem('User', 'sub1', <UserOutlined />, [
+    getItem('Tom', '3'),
+    getItem('Bill', '4'),
+    getItem('Alex', '5'),
+  ]),
+  getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
   getItem('Files', '9', <FileOutlined />),
 ];
-const App = () => {
+
+const Mylayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout
@@ -42,7 +45,7 @@ const App = () => {
           style={{
             padding: 0,
           }}
-        ><Title style={{color:'white', textAlign:'center'}}><CheckOutlined style={{position:'relative', bottom:'8px'}}/>  Task</Title></Header>
+        />
         <Content
           style={{
             margin: '0 16px',
@@ -64,9 +67,6 @@ const App = () => {
             }}
           >
             Bill is a cat.
-              <CreateTaskBox/>
-              <TaskList/>
-
           </div>
         </Content>
         <Footer
@@ -79,8 +79,6 @@ const App = () => {
       </Layout>
     </Layout>
   );
-    
-}
+};
 
-
-export default App;
+export default Mylayout;
