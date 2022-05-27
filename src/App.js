@@ -1,10 +1,9 @@
 import logo from './logo.svg';
-import './App.css';
 import { DatePicker, message, PageHeader } from 'antd';
-import 'antd/dist/antd.css';
 import CreateTaskBox from './components/create-task-box';
 import {Header} from 'antd/lib/layout/layout';
 import Title from 'antd/lib/skeleton/Title';
+import './App.css';
 
 
 const App = () => {
