@@ -1,12 +1,14 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
-import { FileOutlined, PieChartOutlined, UserOutlined, TeamOutlined, DesktopOutlined, BookOutlined, CheckOutlined } from '@ant-design/icons';
+import { FileOutlined, PieChartOutlined, UserOutlined, TeamOutlined, DesktopOutlined, BookOutlined, CheckOutlined, HeartOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import {Typography} from "antd";
 import { useState } from 'react';
 import CreateTaskBox from './components/create-task-box'
 import TaskList from './components/task-list'
+import { Anchor } from 'antd';
+const { Link } = Anchor;
 const { Header, Content, Footer, Sider } = Layout;
 const {Title} = Typography
 
@@ -25,6 +27,7 @@ const items = [
   getItem('Files', '9', <FileOutlined />),
 ];
 const App = () => {
+  const [tasks, setTasks ] = useState([])
   const [collapsed, setCollapsed] = useState(false);
   return (
     <Layout
@@ -54,7 +57,7 @@ const App = () => {
             }}
           >
             <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Bill</Breadcrumb.Item>
+            <Breadcrumb.Item>Tasks</Breadcrumb.Item>
           </Breadcrumb>
           <div
             className="site-layout-background"
@@ -63,9 +66,8 @@ const App = () => {
               minHeight: 360,
             }}
           >
-            Bill is a cat.
-              <CreateTaskBox/>
-              <TaskList/>
+          <CreateTaskBox tasks={tasks} setTasks={setTasks}/>
+          <TaskList tasks={tasks} setTasks={setTasks}/>
 
           </div>
         </Content>
@@ -74,7 +76,8 @@ const App = () => {
             textAlign: 'center',
           }}
         >
-          Ant Design ©2018 Created by Ant UED
+
+            Made with <HeartOutlined /> by <a href='https://github.com/MarkelCA'>Markel Cuesta</a>
         </Footer>
       </Layout>
     </Layout>

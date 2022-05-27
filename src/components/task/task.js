@@ -7,7 +7,7 @@ const {Paragraph} = Typography
 const { Panel } = Collapse;
 const { Option } = Select
 
-const Task = ({completed, title, category, description, tags}) => {
+const Task = ({completed, title, category, description, tags, index}) => {
 
     const categorySelect = (
         <div className='task-controls'>
@@ -34,7 +34,7 @@ const Task = ({completed, title, category, description, tags}) => {
 
     return <div>
     <Collapse>
-      <Panel  header={taskHeader} key="1">
+      <Panel  header={taskHeader} key={index}>
             <Paragraph style={{width:'100%', textAlign:'left'}} editable>{description}</Paragraph>
       </Panel>
     </Collapse>

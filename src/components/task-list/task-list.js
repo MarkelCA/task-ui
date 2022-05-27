@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import Task from '../task';
 
 const tasks = [
@@ -19,14 +19,18 @@ const tasks = [
 
 ]
 
-const TaskList = () => {
+const TaskList = ({tasks, setTasks}) => {
+    useEffect(() => {
+        setTasks(tasks)
+      }, []);
 
-    const taskList = tasks.map((task) => <Task 
+    const taskList = tasks.map((task, index) => <Task 
         completed={task.completed} 
         title={task.title} 
         category={task.category}
         description={task.description}
         tags={task.tags}
+        key={index}
         />
     )
     return <div id='task-list'>{taskList}</div>;
