@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from "react";
 import Task from '../task';
+import axios from "../../api/axios";
 
 const defaultTasks = [
     {
@@ -21,9 +22,18 @@ const defaultTasks = [
 
 const TaskList = () => {
     const [tasks, setTasks] = useState([])
+    const baseURL = "https://jsonplaceholder.typicode.com/posts/1";
 
     useEffect(() => {
-        setTasks(defaultTasks)
+        axios.get('/task')
+          .then(function (response) {
+            setTasks(response.data)
+            console.log(response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          })
+
       }, []);
 
     const taskList = tasks.map((task, index) => <Task 
