@@ -1,41 +1,32 @@
-import React, {persona
-    }from "react";
-import { Row, Col, Select, Input, Checkbox } from "antd";
+import React, {persona }from "react";
+import { Row, Col, Checkbox, Button } from "antd";
+import {EditOutlined} from '@ant-design/icons';
 import { Collapse } from 'antd';
 import {Typography} from "antd";
 const {Paragraph} = Typography
 const { Panel } = Collapse;
-const { Option } = Select
 
 const Task = ({completed, title, category, description, tags, index}) => {
 
-    const categorySelect = (
-        <div className='task-controls'>
-            <Select defaultValue={category} onClick={(e) => e.stopPropagation()}>
-            <Option value="personal">Personal</Option>
-            <Option value="profesional">Profesional</Option>
-            <Option value="estudio">Estudio</Option>
-        </Select>
-        </div>
-    )
 
-    const taskHeader = <Row width='100%'>
+    const taskHeader = <Row width='100%' gutter={14} >
              <Col>
-                <Checkbox defaultValue={completed} style={{marginRight: '.8em'}} onClick={(e) => e.stopPropagation()}></Checkbox>
+               <Checkbox defaultValue={completed} style={{marginRight: '.8em'}} onClick={(e) => e.stopPropagation()}></Checkbox>
              </Col>
+            <Col>
+                <Button onClick={(e) => e.stopPropagation()}><EditOutlined /></Button>
+            </Col>
              <Col>
-                {categorySelect}
-             </Col>
-             <Col>
-                 <Input  defaultValue={title}/>
+                 <Paragraph>{title}</Paragraph>
              </Col>
         </Row>
+
     //
 
     return <div>
     <Collapse>
       <Panel  header={taskHeader} key={index}>
-            <Paragraph style={{width:'100%', textAlign:'left'}} editable>{description}</Paragraph>
+            <Paragraph style={{width:'100%', textAlign:'left'}} >{description}</Paragraph>
       </Panel>
     </Collapse>
         

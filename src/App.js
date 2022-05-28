@@ -1,43 +1,69 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
-import { FileOutlined, PieChartOutlined, UserOutlined, TeamOutlined, DesktopOutlined, BookOutlined, CheckOutlined, HeartOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, Menu } from 'antd';
-import {Typography} from "antd";
+import {  UserOutlined, BookOutlined, CheckOutlined, HeartOutlined, CalendarOutlined, UnorderedListOutlined, HomeOutlined,CheckCircleOutlined } from '@ant-design/icons';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Breadcrumb, Layout, Menu, Typography } from 'antd';
+import { Link } from "react-router-dom";
 import { useState } from 'react';
 import CreateTaskBox from './components/create-task-box'
-import TaskList from './components/task-list'
-import { Anchor } from 'antd';
-const { Link } = Anchor;
+import Tasks from './pages/tasks'
+import Home from './pages/home'
 const { Header, Content, Footer, Sider } = Layout;
 const {Title} = Typography
+const { SubMenu } = Menu;
 
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
 
-const items = [
-  getItem('Personal', '1', <UserOutlined />),
-  getItem('Estudios', '2', <BookOutlined />),
-  getItem('Files', '9', <FileOutlined />),
-];
 const App = () => {
   const [tasks, setTasks ] = useState([])
   const [collapsed, setCollapsed] = useState(false);
   return (
+      <BrowserRouter>
     <Layout
       style={{
         minHeight: '100vh',
       }}
     >
-      <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
+        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} >
         <div className="logo" />
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" >
+            <Menu.Item key="home">
+                 <HomeOutlined/>
+                <span>Home</span>
+                <Link to="/" />
+          </Menu.Item>
+            <Menu.Item key="tasks">
+                <CheckCircleOutlined />
+                <span>Tasks</span>
+                <Link to="/all" />
+          </Menu.Item>
+        <SubMenu
+            key="sub1"
+            title={
+              <span>
+                <UnorderedListOutlined />
+                <span>Categories</span>
+              </span>
+            }
+          >
+            <Menu.Item key="personal">
+                 <UserOutlined/>
+                <span>Personal</span>
+                <Link to="/all/personal" />
+
+            </Menu.Item>
+            <Menu.Item key="study">
+                <BookOutlined/>
+                <span>Study</span>
+                <Link to="/all/study" />
+            </Menu.Item>
+          </SubMenu>
+            <Menu.Item key="History">
+                 <CalendarOutlined/>
+                <span>History</span>
+                <Link to="/history" />
+          </Menu.Item>
+        </Menu>
       </Sider>
       <Layout className="site-layout">
         <Header
@@ -45,20 +71,14 @@ const App = () => {
           style={{
             padding: 0,
           }}
-        ><Title style={{color:'white', textAlign:'center'}}><CheckOutlined style={{position:'relative', bottom:'8px'}}/>  Task</Title></Header>
+        ><Title style={{color:'white', textAlign:'center'}}><CheckOutlined style={{position:'relative', bottom:'8px'}}/>  Task</Title>
+
+        </Header>
         <Content
           style={{
             margin: '0 16px',
           }}
         >
-          <Breadcrumb
-            style={{
-              margin: '16px 0',
-            }}
-          >
-            <Breadcrumb.Item>User</Breadcrumb.Item>
-            <Breadcrumb.Item>Tasks</Breadcrumb.Item>
-          </Breadcrumb>
           <div
             className="site-layout-background"
             style={{
@@ -66,8 +86,14 @@ const App = () => {
               minHeight: 360,
             }}
           >
-          <CreateTaskBox tasks={tasks} setTasks={setTasks}/>
-          <TaskList tasks={tasks} setTasks={setTasks}/>
+
+              <Routes>
+                  <Route path='/' element={<Home />} />
+                  <Route path='/new' element={<CreateTaskBox />} />
+                  <Route path='/all' element={<Tasks/>} />
+              </Routes>
+          
+          
 
           </div>
         </Content>
@@ -81,6 +107,7 @@ const App = () => {
         </Footer>
       </Layout>
     </Layout>
+          </BrowserRouter>
   );
     
 }

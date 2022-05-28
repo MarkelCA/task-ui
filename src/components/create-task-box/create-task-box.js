@@ -6,17 +6,10 @@ import { Button } from "antd";
 import {Typography} from "antd";
 const {Title} = Typography
 
-const CreateTaskBox = ({tasks, setTasks}) => {
+const CreateTaskBox = () => {
 
     const addTask = () => {
         message.info("New Task!")
-        setTasks([...tasks, {
-            title: '',
-            completed: false,
-            category: 'personal',
-            description: '',
-            tags: []
-        }])
     }
     
     return <div className="task" style={{marginTop: '1em',marginBottom: '1em'}}>

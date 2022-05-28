@@ -1,7 +1,7 @@
-import React, { Component, useEffect } from "react";
+import React, { Component, useEffect, useState } from "react";
 import Task from '../task';
 
-const tasks = [
+const defaultTasks = [
     {
         title: 'Do shopping',
         completed: false,
@@ -19,9 +19,11 @@ const tasks = [
 
 ]
 
-const TaskList = ({tasks, setTasks}) => {
+const TaskList = () => {
+    const [tasks, setTasks] = useState([])
+
     useEffect(() => {
-        setTasks(tasks)
+        setTasks(defaultTasks)
       }, []);
 
     const taskList = tasks.map((task, index) => <Task 
@@ -33,7 +35,7 @@ const TaskList = ({tasks, setTasks}) => {
         key={index}
         />
     )
-    return <div id='task-list'>{taskList}</div>;
+    return <div id='task-list'> {taskList} </div>;
 }
 
 export default TaskList;
