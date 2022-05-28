@@ -96,11 +96,11 @@ const App = () => {
               <Routes>
                   <Route path='/' element={<Home />} />
                   <Route path='/new' element={<CreateTaskBox />} />
-                  <Route path='/all' element={<Tasks/>} />
+                  <Route path='/all' element={<Tasks completed={false}/>} />
+                  <Route path='/history' element={<Tasks completed={true}/>} />
                   <Route path='/new-task' element={<NewTask/>} />
+                <Route path="*" element={<Home />} />
               </Routes>
-          
-          
 
           </div>
         </Content>

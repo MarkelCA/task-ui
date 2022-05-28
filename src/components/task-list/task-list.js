@@ -2,11 +2,12 @@ import React, { Component, useEffect, useState } from "react";
 import Task from '../task';
 import axios from "../../api/axios";
 
-const TaskList = () => {
+const TaskList = ({completed}) => {
     const [tasks, setTasks] = useState([])
+    const route = completed ? '/history' : '/tasks'
 
     useEffect(() => {
-        axios.get('/task')
+        axios.get(route)
           .then(function (response) {
             setTasks(response.data)
           })
@@ -14,7 +15,7 @@ const TaskList = () => {
             console.log(error);
           })
 
-      }, []);
+      }, [completed]);
 
     const taskList = tasks.map((task) => <Task 
         task={task}

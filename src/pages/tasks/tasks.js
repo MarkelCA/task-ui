@@ -1,20 +1,22 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {PageHeader} from "antd";
 import TaskList from "../../components/task-list/task-list";
 import CreateTaskBox from "../../components/create-task-box"
 
-const Tasks = () => {
+const Tasks = ({completed}) => {
     const navigate = useNavigate();
+    const title       = completed ? 'History' : 'Tasks';
+    const subTitle = completed ? 'What did you acomplish so far,' : 'See what you have to do today';
     return <div>
     <PageHeader
         className="site-page-header"
         onBack={() =>   navigate('/', {replace : true})}
-        title="Tasks"
-        subTitle="See what you have to do today."
+        title={title}
+        subTitle={subTitle}
       />
         <CreateTaskBox/>
-        <TaskList/>
+        <TaskList completed={completed}/>
         </div>;
 }
 
