@@ -1,13 +1,13 @@
 import React, {persona }from "react";
-import { Row, Col, Checkbox, Button } from "antd";
-import {EditOutlined} from '@ant-design/icons';
+import { Row, Col, Checkbox, Button, DatePicker } from "antd";
+import {EditOutlined, UnorderedListOutlined, CalendarOutlined} from '@ant-design/icons';
 import { Collapse } from 'antd';
 import {Typography} from "antd";
 import { message } from "antd";
 const {Paragraph} = Typography
 const { Panel } = Collapse;
 
-const Task = ({completed, title, category, description, tags, index}) => {
+const Task = ({task, key}) => {
     const completeTask = ({target}) => {
         if(target.checked)
             message.success("Completed!")
@@ -16,13 +16,13 @@ const Task = ({completed, title, category, description, tags, index}) => {
 
     const taskHeader = <Row width='100%' gutter={14} >
              <Col>
-               <Checkbox defaultValue={completed} style={{marginRight: '.8em'}} onClick={(e) => e.stopPropagation()} onChange={completeTask}></Checkbox>
+               <Checkbox defaultValue={task.completed} style={{marginRight: '.8em'}} onClick={(e) => e.stopPropagation()} onChange={completeTask}></Checkbox>
              </Col>
             <Col>
                 <Button onClick={(e) => e.stopPropagation()}><EditOutlined /></Button>
             </Col>
              <Col>
-                 <Paragraph>{title}</Paragraph>
+                 <Paragraph>{task.title}</Paragraph>
              </Col>
         </Row>
 
@@ -30,8 +30,20 @@ const Task = ({completed, title, category, description, tags, index}) => {
 
     return <div>
     <Collapse>
-      <Panel  header={taskHeader} key={index}>
-            <Paragraph style={{width:'100%', textAlign:'left'}} >{description}</Paragraph>
+        <Panel  header={taskHeader} key={key} style={{padding: '.2em 1em '}}>
+            <Row width='100%' gutter={14} >
+                 <Col>
+                    <Button><UnorderedListOutlined style={{position:'relative', bottom:'3px'}}/>{task.category.machine_name}</Button>
+                 </Col>
+                <Col>
+                    <Button><CalendarOutlined style={{position:'relative', bottom:'3px'}}/>{task.date}</Button>
+                </Col>
+            </Row>
+          <Row style={{marginTop:'1em'}}>
+                <Col>
+                    <Paragraph style={{width:'100%', textAlign:'left'}} >{task.description}</Paragraph>
+                </Col>
+            </Row>
       </Panel>
     </Collapse>
         
