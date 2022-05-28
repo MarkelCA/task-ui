@@ -28,6 +28,27 @@ const Home = () => {
                 />
           </Card>
         </Link>      
+        <Link to="/new-task">
+          <Card
+            hoverable
+            style={{
+              width: 300,
+              height: 300,
+            }}
+            cover={
+              <img
+                alt="example"
+                src="/paisaje2.jpg"
+                style={{width:'300px', height: '200px'}}
+              />
+            }
+          >
+            <Meta
+              title="New Task"
+              description="Let's be productive"
+            />
+          </Card>
+        </Link>      
 
         <Link to="/history">
           <Card

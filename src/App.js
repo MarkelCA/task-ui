@@ -1,7 +1,7 @@
 import React from 'react';
 import 'antd/dist/antd.css';
 import './index.css';
-import {  UserOutlined, BookOutlined, CheckOutlined, HeartOutlined, CalendarOutlined, UnorderedListOutlined, HomeOutlined,CheckCircleOutlined } from '@ant-design/icons';
+import {  UserOutlined, BookOutlined, CheckOutlined, HeartOutlined, CalendarOutlined, UnorderedListOutlined, HomeOutlined,CheckCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Breadcrumb, Layout, Menu, Typography } from 'antd';
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ import { useState } from 'react';
 import CreateTaskBox from './components/create-task-box'
 import Tasks from './pages/tasks'
 import Home from './pages/home'
+import NewTask from './pages/new-task/new-task';
 const { Header, Content, Footer, Sider } = Layout;
 const {Title} = Typography
 const { SubMenu } = Menu;
@@ -31,6 +32,11 @@ const App = () => {
                  <HomeOutlined/>
                 <span>Home</span>
                 <Link to="/" />
+          </Menu.Item>
+            <Menu.Item key="new-task">
+                <PlusOutlined />
+                <span>New task</span>
+                <Link to="/new-task" />
           </Menu.Item>
             <Menu.Item key="tasks">
                 <CheckCircleOutlined />
@@ -91,6 +97,7 @@ const App = () => {
                   <Route path='/' element={<Home />} />
                   <Route path='/new' element={<CreateTaskBox />} />
                   <Route path='/all' element={<Tasks/>} />
+                  <Route path='/new-task' element={<NewTask/>} />
               </Routes>
           
           

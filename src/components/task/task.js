@@ -3,15 +3,20 @@ import { Row, Col, Checkbox, Button } from "antd";
 import {EditOutlined} from '@ant-design/icons';
 import { Collapse } from 'antd';
 import {Typography} from "antd";
+import { message } from "antd";
 const {Paragraph} = Typography
 const { Panel } = Collapse;
 
 const Task = ({completed, title, category, description, tags, index}) => {
-
+    const completeTask = ({target}) => {
+        if(target.checked)
+            message.success("Completed!")
+   }
+ 
 
     const taskHeader = <Row width='100%' gutter={14} >
              <Col>
-               <Checkbox defaultValue={completed} style={{marginRight: '.8em'}} onClick={(e) => e.stopPropagation()}></Checkbox>
+               <Checkbox defaultValue={completed} style={{marginRight: '.8em'}} onClick={(e) => e.stopPropagation()} onChange={completeTask}></Checkbox>
              </Col>
             <Col>
                 <Button onClick={(e) => e.stopPropagation()}><EditOutlined /></Button>
