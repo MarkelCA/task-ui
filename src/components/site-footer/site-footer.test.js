@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import TaskForm from "./task-form";
+import SiteFooter from "./site-footer";
 
-describe("TaskForm", () => {
+describe("SiteFooter", () => {
   test("matches snapshot", () => {
-    const wrapper = shallow(<TaskForm />);
+    const wrapper = shallow(<SiteFooter />);
     expect(wrapper).toMatchSnapshot();
   });
 });
