@@ -27,7 +27,7 @@ const Task = ({task}) => {
  
     const taskHeader = <Row width='100%' gutter={14} >
              <Col>
-               <Checkbox defaultValue={task.completed} style={{marginRight: '.8em'}} onClick={(e) => e.stopPropagation()} onChange={completeTask}></Checkbox>
+               <Checkbox defaultChecked={task.completed} defaultValue={task.completed} style={{marginRight: '.8em'}} onClick={(e) => e.stopPropagation()} onChange={completeTask}></Checkbox>
              </Col>
             <Col>
                 <Button onClick={editTask}><EditOutlined /></Button>

@@ -41,7 +41,7 @@ const App = () => {
             <Menu.Item key="tasks">
                 <CheckCircleOutlined />
                 <span>Tasks</span>
-                <Link to="/all" />
+                <Link to="/tasks" />
           </Menu.Item>
         <SubMenu
             key="sub1"
@@ -55,13 +55,13 @@ const App = () => {
             <Menu.Item key="personal">
                  <UserOutlined/>
                 <span>Personal</span>
-                <Link to="/all/personal" />
+                <Link to="/tasks/personal" />
 
             </Menu.Item>
             <Menu.Item key="study">
                 <BookOutlined/>
                 <span>Study</span>
-                <Link to="/all/study" />
+                <Link to="/tasks/study" />
             </Menu.Item>
           </SubMenu>
             <Menu.Item key="History">
@@ -96,7 +96,7 @@ const App = () => {
               <Routes>
                   <Route path='/' element={<Home />} />
                   <Route path='/new' element={<CreateTaskBox />} />
-                  <Route path='/all' element={<Tasks completed={false}/>} />
+                  <Route path='/tasks' element={<Tasks completed={false}/>} />
                   <Route path='/history' element={<Tasks completed={true}/>} />
                   <Route path='/new-task' element={<NewTask/>} />
                   <Route path='/task/:id' element={<EditTask/>} />
@@ -116,7 +116,7 @@ const App = () => {
       </Layout>
     </Layout>
           </BrowserRouter>
-  );
+  )
     
 }
 

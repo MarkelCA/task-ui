@@ -1,7 +1,7 @@
 import React from "react";
-import NewTaskForm from '../../components/task-form'
 import {PageHeader} from "antd";
 import { useNavigate } from "react-router-dom";
+import TaskForm from "../../components/task-form";
 
 
 const NewTask = () => {
@@ -13,7 +13,7 @@ const NewTask = () => {
         title="New Task"
         subTitle="Let's be productive!"
       />
-        <NewTaskForm/>
+        <TaskForm/>
         </div>;
 }
 

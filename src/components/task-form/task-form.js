@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import './task-form.css'
 import moment from 'moment'
 import axios from "../../api/axios";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   DatePicker,
@@ -14,6 +15,7 @@ import {
 } from 'antd';
 
 const TaskForm = ({task}) => {
+    const navigate = useNavigate();
     const [tags, setTags] = useState([])
     const [categories, setCategories] = useState([])
     const [form] = Form.useForm()
@@ -39,7 +41,11 @@ const TaskForm = ({task}) => {
 
     useEffect(() => {
         form.resetFields()
-    },[task])
+    },[task, form])
+
+    const submitForm = (values)  => {
+        task ? updateTask(values) : createTask(values)
+    }
 
     const createTask = (values) => {
         let date = values.date
@@ -49,6 +55,7 @@ const TaskForm = ({task}) => {
         axios.post('/tasks', values)
             .then(() => {
               message.info("New task created!")
+                form.resetFields()
           })
           .catch(function (error) {
               message.error("Couldn't create the task")
@@ -57,21 +64,39 @@ const TaskForm = ({task}) => {
 
     }
 
+    const updateTask = (values) => {
+        axios.put(`/tasks/${task.id}`, {id:task.id, ...values})
+            .then(() => {
+              message.info("Task updated!")
+              navigate('/tasks')
+          })
+          .catch(function (error) {
+              message.error("Couldn't update the task")
+              console.log(error);
+          });
+    }
+
+    const parseTask = () => {
+        const date = task.date ? moment(task.date) : ''
+        const tags = task.tags ? task.tags.map((tag) => tag.id) : []
+        return {...task,
+            category:task.category.machine_name,
+            date:date,
+            tags:tags
+
+        }
+    }
+
     const tailLayout = {
       wrapperCol: {
         offset: 4,
       },
     };
-    return <Form onFinish={createTask}
+    return <Form onFinish={submitForm}
         form={form}
-        initialValues={task ? {...task,
-            category:task.category.machine_name,
-            date:moment(task.date),
-            tags:task.tags.map((tag) => tag.id)
-
-        } : {
+        initialValues={task ? parseTask() : {
             category:'personal',
-            description:'ee',
+            description:'',
             date:'',
             tags:[],
             completed: false

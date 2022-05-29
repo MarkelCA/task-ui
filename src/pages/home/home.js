@@ -7,7 +7,7 @@ const Home = () => {
 
     return <>
     <Space>
-            <Link to="/all">
+            <Link to="/tasks">
             <Card
                 hoverable
                 style={{
@@ -72,7 +72,7 @@ const Home = () => {
             />
           </Card>
         </Link>      
-          </Space>;
+          </Space>
     </>
 }
 

@@ -15,10 +15,11 @@ const EditTask = () => {
               setTask(response.data)
           })
           .catch(function (error) {
+              navigate('/tasks')
             console.log(error);
           })
 
-      }, [id]);
+      }, [id, navigate]);
 
     return <div>
     <PageHeader
