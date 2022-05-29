@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { Layout } from "antd";
+import { Layout, Button, Typography } from "antd";
 import {  HeartOutlined, } from '@ant-design/icons';
 const {Footer} = Layout
+const {Text, Link} = Typography
 
 const SiteFooter = () => {
     return (
         <Footer style={{ textAlign: 'center', }} >
-            Made with <HeartOutlined /> by <a href='https://github.com/MarkelCA'>Markel Cuesta</a>
+            <Text type='secondary' italic >Made with <HeartOutlined /> by  <Link target='_blank' type='link' href='https://github.com/MarkelCA'>Markel Cuesta</Link></Text>
         </Footer>
     );
 }
