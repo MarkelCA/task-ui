@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Menu } from "antd";
 import { Link } from "react-router-dom";
 import {
@@ -11,8 +11,12 @@ import {
     PlusOutlined
 } from '@ant-design/icons'
 const { SubMenu } = Menu;
+
+
 const AsideMenu = () => {
-    return <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" >
+
+    return (
+        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" >
             <Menu.Item key="home">
                  <HomeOutlined/>
                 <span>Home</span>
@@ -55,6 +59,7 @@ const AsideMenu = () => {
                 <Link to="/history" />
           </Menu.Item>
         </Menu>
+    ) 
 }
 
 export default AsideMenu;

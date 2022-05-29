@@ -24,15 +24,17 @@ const EditTask = () => {
       }, [id, navigate]);
 
 
-    return <div>
-    <PageHeader
-        className="site-page-header"
-        onBack={() =>   navigate(backRoute, {replace : true})}
-        title="EditTask"
-        subTitle="Change of plans?"
-      />
-        <TaskForm task={task}/>
-        </div>;
+    return (
+        <>
+        <PageHeader
+            className="site-page-header"
+            onBack={() =>   navigate(backRoute, {replace : true})}
+            title="EditTask"
+            subTitle="Change of plans?"
+          />
+          <TaskForm task={task}/>
+        </>
+    )
 }
 
 export default EditTask;

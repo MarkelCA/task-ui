@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { Layout, Button, Typography } from "antd";
+import React  from "react";
+import { Layout, Typography } from "antd";
 import {  HeartOutlined, } from '@ant-design/icons';
 const {Footer} = Layout
 const {Text, Link} = Typography
+
 
 const SiteFooter = () => {
     return (
