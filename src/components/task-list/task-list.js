@@ -17,12 +17,9 @@ const TaskList = ({completed}) => {
 
       }, [completed]);
 
-    const taskList = tasks.map((task) => <Task 
-        task={task}
-        key={task.id}
-        />
-    )
-    return <div id='task-list'> {taskList} </div>;
+    return <div id='task-list'>
+            {tasks.map((task) => <Task task={task} key={task.id} />)}
+        </div>;
 }
 
 export default TaskList;
