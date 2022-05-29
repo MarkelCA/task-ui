@@ -90,6 +90,7 @@ const App = () => {
             style={{
               padding: 24,
               minHeight: 360,
+              margin: 'auto'
             }}
           >
 

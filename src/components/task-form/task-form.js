@@ -19,11 +19,13 @@ const TaskForm = ({task}) => {
     const [tags, setTags] = useState([])
     const [categories, setCategories] = useState([])
     const [form] = Form.useForm()
+    const [backRoute, setBackRoute] = useState('')
 
     useEffect(() => {
         axios.get('/tags')
           .then(function (response) {
             setTags(response.data)
+              setBackRoute(response.data.completed ? '/history' : '/tasks')
           })
           .catch(function (error) {
             console.log(error);
@@ -54,8 +56,9 @@ const TaskForm = ({task}) => {
 
         axios.post('/tasks', values)
             .then(() => {
-              message.info("New task created!")
+              message.success("New task created!")
                 form.resetFields()
+                navigate(backRoute)
           })
           .catch(function (error) {
               message.error("Couldn't create the task")
@@ -67,8 +70,8 @@ const TaskForm = ({task}) => {
     const updateTask = (values) => {
         axios.put(`/tasks/${task.id}`, {id:task.id, ...values})
             .then(() => {
-              message.info("Task updated!")
-              navigate('/tasks')
+              message.success("Task updated!")
+              navigate(backRoute)
           })
           .catch(function (error) {
               message.error("Couldn't update the task")
@@ -112,7 +115,7 @@ const TaskForm = ({task}) => {
     >
         
         <Form.Item name="title" label="Title" required >
-            <Input  allowClear required={true} message='aoeu'/>
+            <Input  allowClear required={true}/>
       </Form.Item>
       <Form.Item name='description' label="Description">
         <Input allowClear />

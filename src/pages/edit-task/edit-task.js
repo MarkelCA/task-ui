@@ -8,11 +8,13 @@ const EditTask = () => {
     const navigate = useNavigate();
     const [task, setTask] = useState()
     const {id} = useParams()
+    const [backRoute, setBackRoute] = useState('')
     
     useEffect(() => {
         axios.get(`/tasks/${id}`)
           .then(function (response) {
               setTask(response.data)
+              setBackRoute(response.data.completed ? '/history' : '/tasks')
           })
           .catch(function (error) {
               navigate('/tasks')
@@ -21,10 +23,11 @@ const EditTask = () => {
 
       }, [id, navigate]);
 
+
     return <div>
     <PageHeader
         className="site-page-header"
-        onBack={() =>   navigate('/', {replace : true})}
+        onBack={() =>   navigate(backRoute, {replace : true})}
         title="EditTask"
         subTitle="Change of plans?"
       />
