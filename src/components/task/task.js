@@ -4,16 +4,34 @@ import {EditOutlined, UnorderedListOutlined, CalendarOutlined, TagOutlined} from
 import { Collapse } from 'antd';
 import {Typography} from "antd";
 import { message } from "antd";
+import axios from "../../api/axios";
 import moment from 'moment'
 import { useNavigate } from "react-router-dom";
 const {Paragraph} = Typography
 const { Panel } = Collapse;
 
-const Task = ({task}) => {
+const Task = ({task, rerender, setRerender}) => {
     const navigate = useNavigate();
-    const completeTask = ({target}) => {
-        if(target.checked)
-            message.success("Completed!")
+
+    const completeTask = (event) => {
+            event.stopPropagation()
+            axios.put(`/tasks/${task.id}`, {
+                id:task.id,
+                ...task,
+                completed: !task.completed,
+                category: task.category.machine_name,
+                tags: task.tags ? task.tags.map((tag) => tag.id) : []
+            })
+                .then(() => {
+                    const completed = !task.completed
+                    if(completed) message.success("Task completed!")
+                    else message.info("Task restored")
+                    setRerender(!rerender)
+              })
+              .catch(function (error) {
+                  message.error("Couldn't update the task")
+                  console.log(error);
+              });
    }
 
     const parseTimestamp = (timestamp) => {

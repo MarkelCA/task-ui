@@ -4,6 +4,7 @@ import axios from "../../api/axios";
 
 const TaskList = ({completed}) => {
     const [tasks, setTasks] = useState([])
+    const [rerender, setRerender] = useState(false)
     const route = completed ? '/history' : '/tasks'
 
     useEffect(() => {
@@ -15,10 +16,10 @@ const TaskList = ({completed}) => {
             console.log(error);
           })
 
-      }, [route]);
+      }, [route, rerender]);
 
     return <div id='task-list'>
-            {tasks.map((task) => <Task task={task} key={task.id} />)}
+            {tasks.map((task) => <Task task={task} key={task.id} rerender={rerender} setRerender={setRerender}/>)}
         </div>;
 }
 
