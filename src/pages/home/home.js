@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { Avatar, Card } from 'antd';
-import {Space, PageHeader} from "antd";
+import React from "react";
+import { Card } from 'antd';
+import {Space} from "antd";
 import { Link } from "react-router-dom";
 const { Meta } = Card;
 const Home = () => {

@@ -1,10 +1,10 @@
 import React from "react";
 import { shallow } from "enzyme";
-import Sandbox from "./sandbox";
+import EditTask from "./edit-task";
 
-describe("Sandbox", () => {
+describe("EditTask", () => {
   test("matches snapshot", () => {
-    const wrapper = shallow(<Sandbox />);
+    const wrapper = shallow(<EditTask />);
     expect(wrapper).toMatchSnapshot();
   });
 });

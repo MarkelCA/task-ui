@@ -1,14 +1,16 @@
-import React, {persona }from "react";
-import { Row, Col, Checkbox, Button, DatePicker, Divider } from "antd";
+import React from "react";
+import { Row, Col, Checkbox, Button } from "antd";
 import {EditOutlined, UnorderedListOutlined, CalendarOutlined, TagOutlined} from '@ant-design/icons';
 import { Collapse } from 'antd';
 import {Typography} from "antd";
 import { message } from "antd";
 import moment from 'moment'
+import { useNavigate } from "react-router-dom";
 const {Paragraph} = Typography
 const { Panel } = Collapse;
 
 const Task = ({task}) => {
+    const navigate = useNavigate();
     const completeTask = ({target}) => {
         if(target.checked)
             message.success("Completed!")
@@ -17,13 +19,18 @@ const Task = ({task}) => {
     const parseTimestamp = (timestamp) => {
         return moment(new Date(timestamp)).format('LLL');
     }
+
+    const editTask = (event) => {
+        event.stopPropagation()
+        navigate(`/task/${task.id}`, {replace:true})
+    }
  
     const taskHeader = <Row width='100%' gutter={14} >
              <Col>
                <Checkbox defaultValue={task.completed} style={{marginRight: '.8em'}} onClick={(e) => e.stopPropagation()} onChange={completeTask}></Checkbox>
              </Col>
             <Col>
-                <Button onClick={(e) => e.stopPropagation()}><EditOutlined /></Button>
+                <Button onClick={editTask}><EditOutlined /></Button>
             </Col>
              <Col>
                  <Paragraph>{task.title}</Paragraph>

@@ -1,13 +1,14 @@
 import React from 'react';
-import 'antd/dist/antd.css';
+import 'antd/dist/antd.min.css';
 import './index.css';
 import {  UserOutlined, BookOutlined, CheckOutlined, HeartOutlined, CalendarOutlined, UnorderedListOutlined, HomeOutlined,CheckCircleOutlined, PlusOutlined } from '@ant-design/icons';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Breadcrumb, Layout, Menu, Typography } from 'antd';
+import { Layout, Menu, Typography } from 'antd';
 import { Link } from "react-router-dom";
 import { useState } from 'react';
 import CreateTaskBox from './components/create-task-box'
 import Tasks from './pages/tasks'
+import EditTask from './pages/edit-task'
 import Home from './pages/home'
 import NewTask from './pages/new-task/new-task';
 const { Header, Content, Footer, Sider } = Layout;
@@ -16,7 +17,6 @@ const { SubMenu } = Menu;
 
 
 const App = () => {
-  const [tasks, setTasks ] = useState([])
   const [collapsed, setCollapsed] = useState(false);
   return (
       <BrowserRouter>
@@ -99,6 +99,7 @@ const App = () => {
                   <Route path='/all' element={<Tasks completed={false}/>} />
                   <Route path='/history' element={<Tasks completed={true}/>} />
                   <Route path='/new-task' element={<NewTask/>} />
+                  <Route path='/task/:id' element={<EditTask/>} />
                 <Route path="*" element={<Home />} />
               </Routes>
 

@@ -1,26 +1,22 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import 'antd/dist/antd.css';
-import './new-task-form.css'
+import './task-form.css'
+import moment from 'moment'
 import axios from "../../api/axios";
 import {
   Button,
-  Cascader,
   DatePicker,
   Form,
   Input,
-  InputNumber,
   message,
-  Radio,
   Select,
   Switch,
-  TreeSelect,
 } from 'antd';
-const { RangePicker } = DatePicker;
-const {Option} = Select
 
-const NewTaskForm = () => {
+const TaskForm = ({task}) => {
     const [tags, setTags] = useState([])
     const [categories, setCategories] = useState([])
+    const [form] = Form.useForm()
 
     useEffect(() => {
         axios.get('/tags')
@@ -41,13 +37,17 @@ const NewTaskForm = () => {
 
       }, []);
 
+    useEffect(() => {
+        form.resetFields()
+    },[task])
+
     const createTask = (values) => {
         let date = values.date
         if(date)
             date = date.format('X')
 
         axios.post('/tasks', values)
-          .then(function (response) {
+            .then(() => {
               message.info("New task created!")
           })
           .catch(function (error) {
@@ -63,9 +63,15 @@ const NewTaskForm = () => {
       },
     };
     return <Form onFinish={createTask}
-        initialValues={{
+        form={form}
+        initialValues={task ? {...task,
+            category:task.category.machine_name,
+            date:moment(task.date),
+            tags:task.tags.map((tag) => tag.id)
+
+        } : {
             category:'personal',
-            description:'',
+            description:'ee',
             date:'',
             tags:[],
             completed: false
@@ -79,6 +85,7 @@ const NewTaskForm = () => {
       }}
       layout="horizontal"
     >
+        
         <Form.Item name="title" label="Title" required >
             <Input  allowClear required={true} message='aoeu'/>
       </Form.Item>
@@ -115,4 +122,4 @@ const NewTaskForm = () => {
     </Form>
 }
 
-export default NewTaskForm;
+export default TaskForm;

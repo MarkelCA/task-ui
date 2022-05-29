@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Task from '../task';
 import axios from "../../api/axios";
 
@@ -15,7 +15,7 @@ const TaskList = ({completed}) => {
             console.log(error);
           })
 
-      }, [completed]);
+      }, [route]);
 
     return <div id='task-list'>
             {tasks.map((task) => <Task task={task} key={task.id} />)}

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import NewTaskForm from '../../components/new-task-form'
+import React from "react";
+import NewTaskForm from '../../components/task-form'
 import {PageHeader} from "antd";
 import { useNavigate } from "react-router-dom";
 

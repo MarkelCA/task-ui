@@ -1,7 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 import { CheckCircleOutlined } from '@ant-design/icons';
 import { Button } from "antd";
-import {Typography} from "antd";
 import { useNavigate } from "react-router-dom";
 
 const CreateTaskBox = () => {
