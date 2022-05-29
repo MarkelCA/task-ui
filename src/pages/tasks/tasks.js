@@ -15,7 +15,7 @@ const Tasks = ({completed}) => {
         title={title}
         subTitle={subTitle}
       />
-        <CreateTaskBox/>
+        {!completed ? <CreateTaskBox/> : ''}
         <TaskList completed={completed}/>
         </div>;
 }
