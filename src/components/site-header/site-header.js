@@ -7,7 +7,7 @@ const {Title} = Typography
 const SiteHeader = () => {
 
     return(
-        <Header className="site-layout-background" style={{ padding: 0, }} >
+        <Header className="site-layout-background" style={{ paddingTop: '.5em' }} >
             <Title style={{color:'white', textAlign:'center'}}><CheckOutlined/>  Task</Title>
         </Header>
     )  
